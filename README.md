@@ -5,7 +5,7 @@ This project, for LoopMIT, focuses on creating a user-friendly interface to cont
 
 ## Images
 <p align="center">
-  <img src="https://github.com/havishshetty/LoopMIT_GUI/blob/main/image.png" width="256" hspace="4">
+  <img src="https://github.com/havishshetty/LoopMIT_GUI/blob/main/image.png">
 </p>
 
 ## Features
