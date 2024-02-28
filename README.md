@@ -3,6 +3,11 @@
 ## Introduction
 This project, for LoopMIT, focuses on creating a user-friendly interface to control and monitor various parameters of the hyperloop system.
 
+## Images
+<p align="center">
+  <img src="https://github.com/havishshetty/LoopMIT_GUI/blob/main/image.png" width="256" hspace="4">
+</p>
+
 ## Features
 - **Control Interface**: LoopMIT provides controls for starting, stopping, and emergency stopping (E-Stop) the hyperloop system.
 - **Real-time Monitoring**: The GUI displays real-time data from various sensors installed in the hyperloop, allowing users to monitor critical parameters such as acceleration, temperature, voltage, and more.
