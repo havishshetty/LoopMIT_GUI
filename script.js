@@ -1,6 +1,5 @@
 const rangeInput = document.getElementById("myRange");
 const distanceSpan = document.getElementById("demo");
-
 let animationFrameId;
 let distance = 0;
 
@@ -88,68 +87,35 @@ document.querySelector(".button1").addEventListener("click", estopSlider);
 
 document.addEventListener("DOMContentLoaded", function () {
   const limtemp = document.getElementById("lim_temp");
-  const acceleration = document.getElementById("acceleration");
-  const voltage = document.getElementById("voltage");
-  const high_battery_temp = document.getElementById("high_battery_temp");
-  const high_battery_voltage = document.getElementById("high_battery_voltage");
-  const high_battery_power = document.getElementById("high_battery_power");
-  const high_battery_current = document.getElementById("high_battery_current");
-  const low_battery_temp = document.getElementById("low_battery_temp");
-  const low_battery_voltage = document.getElementById("low_battery_voltage");
-  const low_battery_current = document.getElementById("low_battery_current");
-  const low_battery_power = document.getElementById("low_battery_power");
-  const pressure = document.getElementById("pressure");
-  const proximity = document.getElementById("proximity");
-  const gap_height = document.getElementById("gap_height");
+  const customErrorPopup = document.getElementById("customErrorPopup");
+  const customErrorMessage = document.getElementById("customErrorMessage");
 
   function fetchSensorData() {
-    fetch("http://localhost:3000/")
+    fetch("http://192.168.4.1/")
       .then((response) => response.json())
       .then((data) => {
         console.log("Received data:", data);
-        limtemp.innerText = `${data.lim_temperature.toFixed(2)}°C`;
-        acceleration.innerText = `${data.acceleration.toFixed(2)} ms-2`;
-        voltage.innerText = `${data.voltage.toFixed(2)} V`;
-        high_battery_temp.innerText = `${data.high_battery_temp.toFixed(2)}°C`;
-        high_battery_voltage.innerText = `${data.high_battery_voltage.toFixed(
-          2
-        )} V`;
-        high_battery_power.innerText = `${data.high_battery_power.toFixed(
-          2
-        )} W`;
-        high_battery_current.innerText = `${data.high_battery_current.toFixed(
-          2
-        )} A`;
-        low_battery_temp.innerText = `${data.low_battery_temp.toFixed(2)}°C`;
-        low_battery_voltage.innerText = `${data.low_battery_voltage.toFixed(
-          2
-        )} V`;
-        low_battery_current.innerText = `${data.low_battery_current.toFixed(
-          2
-        )} A`;
-        low_battery_power.innerText = `${data.low_battery_power.toFixed(2)} W`;
-        pressure.innerText = `${data.pressure.toFixed(2)} Pa`;
-        proximity.innerText = `${data.proximity.toFixed(2)} cm`;
-        gap_height.innerText = `${data.gap_height.toFixed(2)} mm`;
+        limtemp.innerText = `${data.temperature_C.toFixed(2)}°C`; // Accessing the correct key
+        if (data.temperature_C > 70) {
+          showCustomError(
+            "Emergency Stop.Temperature exceeds 70°C."
+          );
+        }
       })
       .catch((error) => {
         console.error("Error", error);
-        limtemp.innerText = `Server Down`;
-        acceleration.innerText = `Server Down`;
-        voltage.innerText = `Server Down`;
-        high_battery_temp.innerText = `Server Down`;
-        high_battery_voltage.innerText = `Server Down`;
-        high_battery_power.innerText = `Server Down`;
-        high_battery_current.innerText = `Server Down`;
-        low_battery_temp.innerText = `Server Down`;
-        low_battery_voltage.innerText = `Server Down`;
-        low_battery_current.innerText = `Server Down`;
-        low_battery_power.innerText = `Server Down`;
-        pressure.innerText = `Server Down`;
-        proximity.innerText = `Server Down`;
-        gap_height.innerText = `Server Down`;
       });
   }
-  setInterval(fetchSensorData, 500);
+
+  function showCustomError(message) {
+    customErrorMessage.innerText = message;
+    customErrorPopup.style.display = "block";
+  }
+
+  function hideCustomError() {
+    customErrorPopup.style.display = "none";
+  }
+
   fetchSensorData();
+  setInterval(fetchSensorData, 10); // Fetch every 10 seconds
 });

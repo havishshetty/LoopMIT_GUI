@@ -246,13 +246,13 @@ p {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   z-index: 9999;
   text-align: center;
-  height: 200px;
-  width: 400px;
+  height: 500px;
+  width: 500px;
   border-radius: 10px;
 }
 
 .custom-error-popup p {
-  font-size: 40px;
+  font-size: 30px;
   margin-bottom: 15px;
 }
 
